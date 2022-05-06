@@ -2,7 +2,6 @@ package com.xbrain.projetoxbrain.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,8 +24,8 @@ public class SellerModel implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID sellerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long sellerId;
 
     @Column(nullable = false, length = 50)
     private String userName;
@@ -66,7 +65,7 @@ public class SellerModel implements Serializable{
     public SellerModel() {
     }
 
-    public SellerModel(UUID sellerId, String userName, String fullName, String email, String phoneNumber, String imgUrl,
+    public SellerModel(Long sellerId, String userName, String fullName, String email, String phoneNumber, String imgUrl,
             String password, SellerStatus sellerStatus, SellerType sellerType, LocalDateTime creationDate,
             LocalDateTime lastUpdateTime) {
         this.sellerId = sellerId;
@@ -82,11 +81,11 @@ public class SellerModel implements Serializable{
         this.lastUpdateTime = lastUpdateTime;
     }
 
-    public UUID getSellerId() {
+    public Long getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(UUID sellerId) {
+    public void setSellerId(Long sellerId) {
         this.sellerId = sellerId;
     }
 
