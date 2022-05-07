@@ -1,14 +1,18 @@
 package com.xbrain.projetoxbrain.models;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.xbrain.projetoxbrain.models.enums.CategoryType;
 
 @Entity
@@ -31,22 +35,23 @@ public class ProductModel implements Serializable {
     private Double price;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private CategoryType categoryType;
 
-    @Column
-    private String imgUrl;
+    @Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    private LocalDateTime creationDate;
 
-    public ProductModel(){
+    public ProductModel() {
     }
 
-    public ProductModel(Long productId, String name, String description, Double price, CategoryType categoryType,
-            String imgUrl) {
+    public ProductModel(Long productId, String name, String description, Double price, CategoryType categoryType, LocalDateTime creationDate) {
         this.productId = productId;
         this.name = name;
         this.description = description;
         this.price = price;
         this.categoryType = categoryType;
-        this.imgUrl = imgUrl;
+        this.creationDate = creationDate;
     }
 
     public Long getProductId() {
@@ -89,12 +94,12 @@ public class ProductModel implements Serializable {
         this.categoryType = categoryType;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public LocalDateTime getCreationDate() {
+        return creationDate;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
     @Override
@@ -120,6 +125,6 @@ public class ProductModel implements Serializable {
         } else if (!productId.equals(other.productId))
             return false;
         return true;
-    }    
-    
+    }
+
 }

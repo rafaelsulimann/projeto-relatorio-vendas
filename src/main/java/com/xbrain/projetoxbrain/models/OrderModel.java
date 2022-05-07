@@ -5,15 +5,12 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.xbrain.projetoxbrain.models.enums.OrderStatus;
 
 @Entity
 @Table(name = "tb_orders")
@@ -29,17 +26,12 @@ public class OrderModel implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime creationDate;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
-
     public OrderModel (){
     }
 
-    public OrderModel(Long orderId, LocalDateTime creationDate, OrderStatus orderStatus) {
+    public OrderModel(Long orderId, LocalDateTime creationDate) {
         this.orderId = orderId;
         this.creationDate = creationDate;
-        this.orderStatus = orderStatus;
     }
 
     public Long getOrderId() {
@@ -56,14 +48,6 @@ public class OrderModel implements Serializable {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
-    }
-
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
     }
 
     @Override

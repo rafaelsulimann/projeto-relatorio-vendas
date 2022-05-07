@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xbrain.projetoxbrain.models.enums.SellerStatus;
 import com.xbrain.projetoxbrain.models.enums.SellerType;
 
@@ -42,10 +41,6 @@ public class SellerModel implements Serializable{
     @Column
     private String imgUrl;
 
-    @Column(nullable = false, length = 255)
-    @JsonIgnore
-    private String password;
-
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private SellerStatus sellerStatus;
@@ -65,8 +60,7 @@ public class SellerModel implements Serializable{
     public SellerModel() {
     }
 
-    public SellerModel(Long sellerId, String userName, String fullName, String email, String phoneNumber, String imgUrl,
-            String password, SellerStatus sellerStatus, SellerType sellerType, LocalDateTime creationDate,
+    public SellerModel(Long sellerId, String userName, String fullName, String email, String phoneNumber, String imgUrl, SellerStatus sellerStatus, SellerType sellerType, LocalDateTime creationDate,
             LocalDateTime lastUpdateTime) {
         this.sellerId = sellerId;
         this.userName = userName;
@@ -74,7 +68,6 @@ public class SellerModel implements Serializable{
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.imgUrl = imgUrl;
-        this.password = password;
         this.sellerStatus = sellerStatus;
         this.sellerType = sellerType;
         this.creationDate = creationDate;
@@ -127,14 +120,6 @@ public class SellerModel implements Serializable{
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public SellerStatus getSellerStatus() {
