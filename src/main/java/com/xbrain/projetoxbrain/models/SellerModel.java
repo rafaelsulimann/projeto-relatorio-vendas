@@ -13,9 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.xbrain.projetoxbrain.models.enums.SellerStatus;
 import com.xbrain.projetoxbrain.models.enums.SellerType;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "tb_sellers")
 public class SellerModel implements Serializable{

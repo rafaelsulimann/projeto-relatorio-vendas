@@ -1,7 +1,5 @@
 package com.xbrain.projetoxbrain.services.impl;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,16 +34,8 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public ProductModel insert(ProductModel productModel) {
-        productModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
-        return productModel;
-    }
-
-    @Override
     public void delete(Long productId) {
         productRepository.deleteById(productId);
     }
-
-
     
 }

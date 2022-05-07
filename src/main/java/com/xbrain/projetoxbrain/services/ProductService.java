@@ -9,7 +9,6 @@ public interface ProductService {
     public List<ProductModel> findAllProducts();
     public ProductModel findProductById(Long productId);
     public ProductModel save(ProductModel productModel);
-    public ProductModel insert(ProductModel productModel);
     public void delete(Long productId);
     
 }

@@ -1,19 +1,25 @@
 package com.xbrain.projetoxbrain.models;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xbrain.projetoxbrain.models.enums.CategoryType;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "tb_products")
@@ -28,9 +34,6 @@ public class ProductModel implements Serializable {
     @Column(nullable = false, length = 150)
     private String name;
 
-    @Column(nullable = false, length = 255)
-    private String description;
-
     @Column(nullable = false)
     private Double price;
 
@@ -38,20 +41,19 @@ public class ProductModel implements Serializable {
     @Enumerated(EnumType.STRING)
     private CategoryType categoryType;
 
-    @Column(nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
-    private LocalDateTime creationDate;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @Fetch(FetchMode.SUBSELECT)
+    private Set<OrderItemModel> items = new HashSet<>();
 
     public ProductModel() {
     }
 
-    public ProductModel(Long productId, String name, String description, Double price, CategoryType categoryType, LocalDateTime creationDate) {
+    public ProductModel(Long productId, String name, Double price, CategoryType categoryType) {
         this.productId = productId;
         this.name = name;
-        this.description = description;
         this.price = price;
         this.categoryType = categoryType;
-        this.creationDate = creationDate;
     }
 
     public Long getProductId() {
@@ -70,14 +72,6 @@ public class ProductModel implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Double getPrice() {
         return price;
     }
@@ -92,14 +86,14 @@ public class ProductModel implements Serializable {
 
     public void setCategoryType(CategoryType categoryType) {
         this.categoryType = categoryType;
+    }    
+
+    public Set<OrderItemModel> getItems() {
+        return items;
     }
 
-    public LocalDateTime getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
+    public void setItems(Set<OrderItemModel> items) {
+        this.items = items;
     }
 
     @Override
