@@ -7,15 +7,20 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.xbrain.projetoxbrain.models.enums.OrderStatus;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -28,7 +33,17 @@ public class OrderModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    private Long orderId;    
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
+
+    @Column(nullable = false)
+    private Long sellerId;
+
+    @Column(nullable = false)
+    private String sellerFullName;
 
     @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
@@ -38,13 +53,22 @@ public class OrderModel implements Serializable {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @Fetch(FetchMode.SUBSELECT)
     private Set<OrderItemModel> items = new HashSet<>();
+    
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "seller_id")
+    private SellerModel seller;
 
     public OrderModel (){
-    }
+    }        
 
-    public OrderModel(Long orderId, LocalDateTime creationDate) {
+    public OrderModel(Long orderId, OrderStatus orderStatus, LocalDateTime creationDate, SellerModel seller) {
         this.orderId = orderId;
+        this.orderStatus = orderStatus;        
         this.creationDate = creationDate;
+        this.seller = seller;
+        sellerId = seller.getSellerId();
+        sellerFullName = seller.getFullName();
     }
 
     public Long getOrderId() {
@@ -55,12 +79,24 @@ public class OrderModel implements Serializable {
         this.orderId = orderId;
     }
 
-    public LocalDateTime getCreationDate() {
-        return creationDate;
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public void setSellerId(Long sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public String getSellerFullName() {
+        return sellerFullName;
+    }
+
+    public void setSellerFullName(String sellerFullName) {
+        this.sellerFullName = sellerFullName;
     }
 
     public Set<OrderItemModel> getItems() {
@@ -69,6 +105,34 @@ public class OrderModel implements Serializable {
 
     public void setItems(Set<OrderItemModel> items) {
         this.items = items;
+    }
+
+    public SellerModel getSeller() {
+        return seller;
+    }
+
+    public void setSeller(SellerModel seller) {
+        this.seller = seller;
+    }
+
+    public double getTotal(){
+        double soma = 0.0;
+        for(OrderItemModel item : items){
+            soma += item.getSubTotal();
+        }
+        return soma;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Long getSellerId() {
+        return sellerId;
     }
 
     @Override

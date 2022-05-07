@@ -27,7 +27,14 @@ public class OrderItemModel implements Serializable {
     @Column(nullable = false)
     private Integer quantity;
 
-    @ManyToOne
+    @Column(nullable = false, length = 100)
+    private String productName;
+
+    @Column(nullable = false)
+    private Double productPrice;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id")
     private ProductModel product;
 
@@ -44,6 +51,8 @@ public class OrderItemModel implements Serializable {
         this.quantity = quantity;
         this.product = product;
         this.order = order;
+        productName = product.getName();
+        productPrice = product.getPrice();
     }
 
     public Long getOrderItemId() {
@@ -76,6 +85,10 @@ public class OrderItemModel implements Serializable {
 
     public void setOrder(OrderModel order) {
         this.order = order;
+    }
+
+    public double getSubTotal(){
+        return quantity * this.getProduct().getPrice();
     }
 
     @Override
