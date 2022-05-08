@@ -5,9 +5,10 @@ import java.time.ZoneId;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.xbrain.projetoxbrain.services.exceptions.OrderItemNotFoundException;
 import com.xbrain.projetoxbrain.services.exceptions.OrderNotFoundException;
 import com.xbrain.projetoxbrain.services.exceptions.ProductNotFoundException;
-import com.xbrain.projetoxbrain.services.exceptions.SellerNotFoundException;
+import com.xbrain.projetoxbrain.services.exceptions.VendorNotFoundException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(OrderNotFoundException.class)
     public ResponseEntity<StandardError> orderResourceNotFound(OrderNotFoundException e, HttpServletRequest request){
-        String error = "Usuário não encontrado";
+        String error = "Order not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
@@ -27,15 +28,23 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<StandardError> productResourceNotFound(ProductNotFoundException e, HttpServletRequest request){
-        String error = "Usuário não encontrado";
+        String error = "Product not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 
-    @ExceptionHandler(SellerNotFoundException.class)
-    public ResponseEntity<StandardError> sellerResourceNotFound(SellerNotFoundException e, HttpServletRequest request){
-        String error = "Usuário não encontrado";
+    @ExceptionHandler(VendorNotFoundException.class)
+    public ResponseEntity<StandardError> sellerResourceNotFound(VendorNotFoundException e, HttpServletRequest request){
+        String error = "Vendor not found";
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(OrderItemNotFoundException.class)
+    public ResponseEntity<StandardError> orderItemResourceNotFound(OrderItemNotFoundException e, HttpServletRequest request){
+        String error = "Order item not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);

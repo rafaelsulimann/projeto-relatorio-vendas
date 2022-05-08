@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.xbrain.projetoxbrain.models.OrderModel;
+import com.xbrain.projetoxbrain.models.VendorModel;
+import com.xbrain.projetoxbrain.models.enums.OrderStatus;
 import com.xbrain.projetoxbrain.repositories.OrderRepository;
 import com.xbrain.projetoxbrain.services.OrderService;
 import com.xbrain.projetoxbrain.services.exceptions.OrderNotFoundException;
@@ -36,8 +38,10 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public OrderModel insert(OrderModel orderModel) {
+    public OrderModel insert(OrderModel orderModel, VendorModel vendorModel) {
+        orderModel.setOrderStatus(OrderStatus.WAITING_PAYMENT);
         orderModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
+        orderModel.setVendor(vendorModel);
         return orderModel;
     }
 

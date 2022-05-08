@@ -5,38 +5,38 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
-import com.xbrain.projetoxbrain.models.SellerModel;
-import com.xbrain.projetoxbrain.repositories.SellerRepository;
-import com.xbrain.projetoxbrain.services.SellerService;
-import com.xbrain.projetoxbrain.services.exceptions.SellerNotFoundException;
+import com.xbrain.projetoxbrain.models.VendorModel;
+import com.xbrain.projetoxbrain.repositories.VendorRepository;
+import com.xbrain.projetoxbrain.services.VendorService;
+import com.xbrain.projetoxbrain.services.exceptions.VendorNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SellerServiceImpl implements SellerService{
+public class VendorServiceImpl implements VendorService{
 
     @Autowired
-    private SellerRepository sellerRepository;
+    private VendorRepository sellerRepository;
 
     @Override
-    public List<SellerModel> findAllSellers() {
+    public List<VendorModel> findAllSellers() {
         return sellerRepository.findAll();
     }
 
     @Override
-    public SellerModel findSellerById(Long sellerId) {
-        Optional<SellerModel> obj = sellerRepository.findById(sellerId);
-        return obj.orElseThrow(() -> new SellerNotFoundException(sellerId));
+    public VendorModel findSellerById(Long sellerId) {
+        Optional<VendorModel> obj = sellerRepository.findById(sellerId);
+        return obj.orElseThrow(() -> new VendorNotFoundException(sellerId));
     }
 
     @Override
-    public SellerModel save(SellerModel sellerModel) {
+    public VendorModel save(VendorModel sellerModel) {
         return sellerRepository.save(sellerModel);
     }
 
     @Override
-    public SellerModel insert(SellerModel sellerModel) {
+    public VendorModel insert(VendorModel sellerModel) {
         sellerModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
         sellerModel.setLastUpdateTime(LocalDateTime.now(ZoneId.of("UTC")));
         return sellerModel;

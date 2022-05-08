@@ -19,22 +19,22 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.xbrain.projetoxbrain.models.enums.SellerStatus;
-import com.xbrain.projetoxbrain.models.enums.SellerType;
+import com.xbrain.projetoxbrain.models.enums.VendorStatus;
+import com.xbrain.projetoxbrain.models.enums.VendorType;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
-@Table(name = "tb_sellers")
-public class SellerModel implements Serializable{
+@Table(name = "tb_vendors")
+public class VendorModel implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sellerId;
+    private Long vendorId;
 
     @Column(nullable = false, length = 100)
     private String fullName;
@@ -50,11 +50,11 @@ public class SellerModel implements Serializable{
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private SellerStatus sellerStatus;
+    private VendorStatus vendorStatus;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private SellerType sellerType;
+    private VendorType vendorType;
 
     @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
@@ -65,32 +65,32 @@ public class SellerModel implements Serializable{
     private LocalDateTime lastUpdateTime;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
     @Fetch(FetchMode.SUBSELECT)
     private Set<OrderModel> orders = new HashSet<>();
 
-    public SellerModel() {
+    public VendorModel() {
     }
 
-    public SellerModel(Long sellerId, String fullName, String email, String phoneNumber, String imgUrl, SellerStatus sellerStatus, SellerType sellerType, LocalDateTime creationDate,
+    public VendorModel(Long vendorId, String fullName, String email, String phoneNumber, String imgUrl, VendorStatus vendorStatus, VendorType vendorType, LocalDateTime creationDate,
             LocalDateTime lastUpdateTime) {
-        this.sellerId = sellerId;
+        this.vendorId = vendorId;
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.imgUrl = imgUrl;
-        this.sellerStatus = sellerStatus;
-        this.sellerType = sellerType;
+        this.vendorStatus = vendorStatus;
+        this.vendorType = vendorType;
         this.creationDate = creationDate;
         this.lastUpdateTime = lastUpdateTime;
     }
 
-    public Long getSellerId() {
-        return sellerId;
+    public Long getVendorId() {
+        return vendorId;
     }
 
-    public void setSellerId(Long sellerId) {
-        this.sellerId = sellerId;
+    public void setVendorId(Long vendorId) {
+        this.vendorId = vendorId;
     }
 
     public String getFullName() {
@@ -125,20 +125,20 @@ public class SellerModel implements Serializable{
         this.imgUrl = imgUrl;
     }
 
-    public SellerStatus getSellerStatus() {
-        return sellerStatus;
+    public VendorStatus getVendorStatus() {
+        return vendorStatus;
     }
 
-    public void setSellerStatus(SellerStatus sellerStatus) {
-        this.sellerStatus = sellerStatus;
+    public void setVendorStatus(VendorStatus vendorStatus) {
+        this.vendorStatus = vendorStatus;
     }
 
-    public SellerType getSellerType() {
-        return sellerType;
+    public VendorType getVendorType() {
+        return vendorType;
     }
 
-    public void setSellerType(SellerType sellerType) {
-        this.sellerType = sellerType;
+    public void setVendorType(VendorType vendorType) {
+        this.vendorType = vendorType;
     }
 
     public LocalDateTime getCreationDate() {
@@ -157,11 +157,23 @@ public class SellerModel implements Serializable{
         this.lastUpdateTime = lastUpdateTime;
     }
 
+    public Double totalSalesValor(){
+        double sum = 0.0;
+        for(OrderModel order : orders){
+            sum += order.getTotal();
+        }
+        return sum;
+    }
+
+    public Integer totalSales(){
+        return orders.size();
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((sellerId == null) ? 0 : sellerId.hashCode());
+        result = prime * result + ((vendorId == null) ? 0 : vendorId.hashCode());
         return result;
     }
 
@@ -173,11 +185,11 @@ public class SellerModel implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        SellerModel other = (SellerModel) obj;
-        if (sellerId == null) {
-            if (other.sellerId != null)
+        VendorModel other = (VendorModel) obj;
+        if (vendorId == null) {
+            if (other.vendorId != null)
                 return false;
-        } else if (!sellerId.equals(other.sellerId))
+        } else if (!vendorId.equals(other.vendorId))
             return false;
         return true;
     }    

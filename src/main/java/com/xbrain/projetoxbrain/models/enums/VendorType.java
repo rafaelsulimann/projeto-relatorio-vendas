@@ -1,6 +1,6 @@
 package com.xbrain.projetoxbrain.models.enums;
 
-public enum SellerType {
+public enum VendorType {
 
     JUNIOR,
     PLENO,

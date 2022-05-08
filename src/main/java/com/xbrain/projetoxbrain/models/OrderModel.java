@@ -40,10 +40,10 @@ public class OrderModel implements Serializable {
     private OrderStatus orderStatus;
 
     @Column(nullable = false)
-    private Long sellerId;
+    private Long orderVendorId;
 
     @Column(nullable = false)
-    private String sellerFullName;
+    private String vendorFullName;
 
     @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
@@ -56,19 +56,19 @@ public class OrderModel implements Serializable {
     
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "seller_id")
-    private SellerModel seller;
+    @JoinColumn(name = "vendor_id")
+    private VendorModel vendor;
 
     public OrderModel (){
     }        
 
-    public OrderModel(Long orderId, OrderStatus orderStatus, LocalDateTime creationDate, SellerModel seller) {
+    public OrderModel(Long orderId, OrderStatus orderStatus, LocalDateTime creationDate, VendorModel vendor) {
         this.orderId = orderId;
         this.orderStatus = orderStatus;        
         this.creationDate = creationDate;
-        this.seller = seller;
-        sellerId = seller.getSellerId();
-        sellerFullName = seller.getFullName();
+        this.vendor = vendor;
+        orderVendorId = vendor.getVendorId();
+        vendorFullName = vendor.getFullName();
     }
 
     public Long getOrderId() {
@@ -87,16 +87,20 @@ public class OrderModel implements Serializable {
         this.orderStatus = orderStatus;
     }
 
-    public void setSellerId(Long sellerId) {
-        this.sellerId = sellerId;
+    public Long getOrderVendorId(){
+        return orderVendorId;
     }
 
-    public String getSellerFullName() {
-        return sellerFullName;
+    public void setOrderVendorId(Long orderVendorId) {
+        this.orderVendorId = orderVendorId;
     }
 
-    public void setSellerFullName(String sellerFullName) {
-        this.sellerFullName = sellerFullName;
+    public String getVendorFullName() {
+        return vendorFullName;
+    }
+
+    public void setVendorFullName(String vendorFullName) {
+        this.vendorFullName = vendorFullName;
     }
 
     public Set<OrderItemModel> getItems() {
@@ -107,12 +111,12 @@ public class OrderModel implements Serializable {
         this.items = items;
     }
 
-    public SellerModel getSeller() {
-        return seller;
+    public VendorModel getVendor() {
+        return vendor;
     }
 
-    public void setSeller(SellerModel seller) {
-        this.seller = seller;
+    public void setVendor(VendorModel vendor) {
+        this.vendor = vendor;
     }
 
     public double getTotal(){
@@ -129,10 +133,6 @@ public class OrderModel implements Serializable {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
-    }
-
-    public Long getSellerId() {
-        return sellerId;
     }
 
     @Override
