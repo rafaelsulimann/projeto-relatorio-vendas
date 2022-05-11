@@ -1,10 +1,10 @@
 package com.xbrain.projetoxbrain.services.exceptions;
 
-public class VendorNotFoundException extends RuntimeException{
+public class SellerNotFoundException extends RuntimeException{
     
     private static final long serialVersionUID = 1L;
 
-    public VendorNotFoundException(Object id){
+    public SellerNotFoundException(Object id){
         super("Seller not found. id " + id);
     }
 }

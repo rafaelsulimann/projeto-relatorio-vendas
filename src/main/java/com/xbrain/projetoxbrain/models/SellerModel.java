@@ -19,22 +19,21 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.xbrain.projetoxbrain.models.enums.VendorStatus;
-import com.xbrain.projetoxbrain.models.enums.VendorType;
+import com.xbrain.projetoxbrain.models.enums.SellerStatus;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
-@Table(name = "tb_vendors")
-public class VendorModel implements Serializable{
+@Table(name = "tb_sellers")
+public class SellerModel implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long vendorId;
+    private Long sellerId;
 
     @Column(nullable = false, length = 100)
     private String fullName;
@@ -42,19 +41,18 @@ public class VendorModel implements Serializable{
     @Column(nullable = false, length = 100)
     private String email;
 
-    @Column(length = 20)
+    @Column(nullable = false, length = 20)
     private String phoneNumber;
+
+    @Column(nullable = false, length = 11)
+    private String cpf;
 
     @Column
     private String imgUrl;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private VendorStatus vendorStatus;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private VendorType vendorType;
+    private SellerStatus sellerStatus;
 
     @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
@@ -65,32 +63,33 @@ public class VendorModel implements Serializable{
     private LocalDateTime lastUpdateTime;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY)
     @Fetch(FetchMode.SUBSELECT)
     private Set<OrderModel> orders = new HashSet<>();
 
-    public VendorModel() {
-    }
+    public SellerModel() {
+    }    
 
-    public VendorModel(Long vendorId, String fullName, String email, String phoneNumber, String imgUrl, VendorStatus vendorStatus, VendorType vendorType, LocalDateTime creationDate,
+    public SellerModel(Long sellerId, String fullName, String email, String phoneNumber, String cpf, String imgUrl,
+            SellerStatus sellerStatus, LocalDateTime creationDate,
             LocalDateTime lastUpdateTime) {
-        this.vendorId = vendorId;
+        this.sellerId = sellerId;
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.cpf = cpf;
         this.imgUrl = imgUrl;
-        this.vendorStatus = vendorStatus;
-        this.vendorType = vendorType;
+        this.sellerStatus = sellerStatus;
         this.creationDate = creationDate;
         this.lastUpdateTime = lastUpdateTime;
+    }    
+
+    public Long getSellerId() {
+        return sellerId;
     }
 
-    public Long getVendorId() {
-        return vendorId;
-    }
-
-    public void setVendorId(Long vendorId) {
-        this.vendorId = vendorId;
+    public void setSellerId(Long sellerId) {
+        this.sellerId = sellerId;
     }
 
     public String getFullName() {
@@ -117,6 +116,14 @@ public class VendorModel implements Serializable{
         this.phoneNumber = phoneNumber;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getImgUrl() {
         return imgUrl;
     }
@@ -125,20 +132,12 @@ public class VendorModel implements Serializable{
         this.imgUrl = imgUrl;
     }
 
-    public VendorStatus getVendorStatus() {
-        return vendorStatus;
+    public SellerStatus getSellerStatus() {
+        return sellerStatus;
     }
 
-    public void setVendorStatus(VendorStatus vendorStatus) {
-        this.vendorStatus = vendorStatus;
-    }
-
-    public VendorType getVendorType() {
-        return vendorType;
-    }
-
-    public void setVendorType(VendorType vendorType) {
-        this.vendorType = vendorType;
+    public void setSellerStatus(SellerStatus sellerStatus) {
+        this.sellerStatus = sellerStatus;
     }
 
     public LocalDateTime getCreationDate() {
@@ -157,6 +156,14 @@ public class VendorModel implements Serializable{
         this.lastUpdateTime = lastUpdateTime;
     }
 
+    public Set<OrderModel> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderModel> orders) {
+        this.orders = orders;
+    }
+
     public Double totalSalesValor(){
         double sum = 0.0;
         for(OrderModel order : orders){
@@ -173,7 +180,7 @@ public class VendorModel implements Serializable{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((vendorId == null) ? 0 : vendorId.hashCode());
+        result = prime * result + ((sellerId == null) ? 0 : sellerId.hashCode());
         return result;
     }
 
@@ -185,11 +192,11 @@ public class VendorModel implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        VendorModel other = (VendorModel) obj;
-        if (vendorId == null) {
-            if (other.vendorId != null)
+        SellerModel other = (SellerModel) obj;
+        if (sellerId == null) {
+            if (other.sellerId != null)
                 return false;
-        } else if (!vendorId.equals(other.vendorId))
+        } else if (!sellerId.equals(other.sellerId))
             return false;
         return true;
     }    

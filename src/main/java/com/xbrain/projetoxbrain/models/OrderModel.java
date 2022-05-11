@@ -40,14 +40,17 @@ public class OrderModel implements Serializable {
     private OrderStatus orderStatus;
 
     @Column(nullable = false)
-    private Long orderVendorId;
+    private Long orderSellerId;
 
     @Column(nullable = false)
-    private String vendorFullName;
+    private String sellerFullName;
 
     @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime creationDate;
+
+    @Column(nullable = false)
+    private Double total = 0.0;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
@@ -56,20 +59,22 @@ public class OrderModel implements Serializable {
     
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "vendor_id")
-    private VendorModel vendor;
+    @JoinColumn(name = "seller_id")
+    private SellerModel seller;
 
     public OrderModel (){
-    }        
+    }      
 
-    public OrderModel(Long orderId, OrderStatus orderStatus, LocalDateTime creationDate, VendorModel vendor) {
+    public OrderModel(Long orderId, OrderStatus orderStatus, Long orderSellerId, String sellerFullName,
+            LocalDateTime creationDate, SellerModel seller, Double total) {
         this.orderId = orderId;
-        this.orderStatus = orderStatus;        
+        this.orderStatus = orderStatus;
+        this.orderSellerId = orderSellerId;
+        this.sellerFullName = sellerFullName;
         this.creationDate = creationDate;
-        this.vendor = vendor;
-        orderVendorId = vendor.getVendorId();
-        vendorFullName = vendor.getFullName();
-    }
+        this.seller = seller;
+        this.total = total;
+    }    
 
     public Long getOrderId() {
         return orderId;
@@ -87,20 +92,28 @@ public class OrderModel implements Serializable {
         this.orderStatus = orderStatus;
     }
 
-    public Long getOrderVendorId(){
-        return orderVendorId;
+    public Long getOrderSellerId() {
+        return orderSellerId;
     }
 
-    public void setOrderVendorId(Long orderVendorId) {
-        this.orderVendorId = orderVendorId;
+    public void setOrderSellerId(Long orderSellerId) {
+        this.orderSellerId = orderSellerId;
     }
 
-    public String getVendorFullName() {
-        return vendorFullName;
+    public String getSellerFullName() {
+        return sellerFullName;
     }
 
-    public void setVendorFullName(String vendorFullName) {
-        this.vendorFullName = vendorFullName;
+    public void setSellerFullName(String sellerFullName) {
+        this.sellerFullName = sellerFullName;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
     public Set<OrderItemModel> getItems() {
@@ -111,28 +124,20 @@ public class OrderModel implements Serializable {
         this.items = items;
     }
 
-    public VendorModel getVendor() {
-        return vendor;
+    public SellerModel getSeller() {
+        return seller;
     }
 
-    public void setVendor(VendorModel vendor) {
-        this.vendor = vendor;
+    public void setSeller(SellerModel seller) {
+        this.seller = seller;
+    }    
+
+    public Double getTotal() {
+        return total;
     }
 
-    public double getTotal(){
-        double soma = 0.0;
-        for(OrderItemModel item : items){
-            soma += item.getSubTotal();
-        }
-        return soma;
-    }
-
-    public LocalDateTime getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
     @Override

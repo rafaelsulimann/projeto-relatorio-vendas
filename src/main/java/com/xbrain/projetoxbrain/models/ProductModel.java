@@ -1,6 +1,7 @@
 package com.xbrain.projetoxbrain.models;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xbrain.projetoxbrain.models.enums.CategoryType;
 
@@ -41,6 +43,10 @@ public class ProductModel implements Serializable {
     @Enumerated(EnumType.STRING)
     private CategoryType categoryType;
 
+    @Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    private LocalDateTime creationDate;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @Fetch(FetchMode.SUBSELECT)
@@ -49,11 +55,12 @@ public class ProductModel implements Serializable {
     public ProductModel() {
     }
 
-    public ProductModel(Long productId, String name, Double price, CategoryType categoryType) {
+    public ProductModel(Long productId, String name, Double price, CategoryType categoryType, LocalDateTime creationDate) {
         this.productId = productId;
         this.name = name;
         this.price = price;
         this.categoryType = categoryType;
+        this.creationDate = creationDate;
     }
 
     public Long getProductId() {
@@ -94,6 +101,14 @@ public class ProductModel implements Serializable {
 
     public void setItems(Set<OrderItemModel> items) {
         this.items = items;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
     @Override

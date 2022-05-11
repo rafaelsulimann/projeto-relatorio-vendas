@@ -2,35 +2,35 @@ package com.xbrain.projetoxbrain.dto;
 
 import java.io.Serializable;
 
-import com.xbrain.projetoxbrain.models.VendorModel;
+import com.xbrain.projetoxbrain.models.SellerModel;
 
-public class VendorSalesDto implements Serializable{
+public class SellerSalesDto implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    private Long vendorId;
+    private Long sellerId;
     private String fullName;
     private Integer totalSales;
     private Double totalSalesValor;
     private Double salesPerDay;
 
-    public VendorSalesDto() {
+    public SellerSalesDto() {
     }
 
-    public VendorSalesDto(VendorModel vendorModel, Double salesPerDay){
-        vendorId = vendorModel.getVendorId();
-        fullName = vendorModel.getFullName();
-        totalSales = vendorModel.totalSales();
-        totalSalesValor = vendorModel.totalSalesValor();
+    public SellerSalesDto(SellerModel sellerModel, Double salesPerDay){
+        sellerId = sellerModel.getSellerId();
+        fullName = sellerModel.getFullName();
+        totalSales = sellerModel.totalSales();
+        totalSalesValor = sellerModel.totalSalesValor();
         this.salesPerDay = salesPerDay;
     }
 
-    public Long getVendorId() {
-        return vendorId;
+    public Long getSellerId() {
+        return sellerId;
     }
 
-    public void setVendorId(Long vendorId) {
-        this.vendorId = vendorId;
+    public void setSellerId(Long sellerId) {
+        this.sellerId = sellerId;
     }
 
     public String getFullName() {
@@ -69,7 +69,7 @@ public class VendorSalesDto implements Serializable{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((vendorId == null) ? 0 : vendorId.hashCode());
+        result = prime * result + ((sellerId == null) ? 0 : sellerId.hashCode());
         return result;
     }
 
@@ -81,11 +81,11 @@ public class VendorSalesDto implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        VendorSalesDto other = (VendorSalesDto) obj;
-        if (vendorId == null) {
-            if (other.vendorId != null)
+        SellerSalesDto other = (SellerSalesDto) obj;
+        if (sellerId == null) {
+            if (other.sellerId != null)
                 return false;
-        } else if (!vendorId.equals(other.vendorId))
+        } else if (!sellerId.equals(other.sellerId))
             return false;
         return true;
     }    

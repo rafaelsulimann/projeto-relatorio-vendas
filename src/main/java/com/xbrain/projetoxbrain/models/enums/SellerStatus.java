@@ -1,6 +1,6 @@
 package com.xbrain.projetoxbrain.models.enums;
 
-public enum VendorStatus {
+public enum SellerStatus {
 
     ACTIVED,
     BLOCKED;

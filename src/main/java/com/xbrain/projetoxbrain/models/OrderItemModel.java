@@ -25,13 +25,16 @@ public class OrderItemModel implements Serializable {
     private Long orderItemId;
 
     @Column(nullable = false)
-    private Integer quantity;
+    private Long productCode;
 
     @Column(nullable = false, length = 100)
     private String productName;
 
     @Column(nullable = false)
     private Double productPrice;
+
+    @Column(nullable = false)
+    private Integer quantity;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -44,15 +47,17 @@ public class OrderItemModel implements Serializable {
     private OrderModel order;
 
     public OrderItemModel(){
-    }    
+    }       
 
-    public OrderItemModel(Long orderItemId, Integer quantity, ProductModel product, OrderModel order) {
+    public OrderItemModel(Long orderItemId, Long productCode, String productName,
+            Double productPrice, Integer quantity, ProductModel product, OrderModel order) {
         this.orderItemId = orderItemId;
+        this.productCode = productCode;
+        this.productName = productName;
+        this.productPrice = productPrice;
         this.quantity = quantity;
         this.product = product;
         this.order = order;
-        productName = product.getName();
-        productPrice = product.getPrice();
     }
 
     public Long getOrderItemId() {
@@ -61,6 +66,30 @@ public class OrderItemModel implements Serializable {
 
     public void setOrderItemId(Long orderItemId) {
         this.orderItemId = orderItemId;
+    }
+
+    public Long getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(Long productCode) {
+        this.productCode = productCode;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public Double getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(Double productPrice) {
+        this.productPrice = productPrice;
     }
 
     public Integer getQuantity() {

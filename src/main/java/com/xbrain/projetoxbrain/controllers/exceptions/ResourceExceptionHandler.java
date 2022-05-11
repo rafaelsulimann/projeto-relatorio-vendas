@@ -5,10 +5,13 @@ import java.time.ZoneId;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.xbrain.projetoxbrain.services.exceptions.ExistsByCpfException;
+import com.xbrain.projetoxbrain.services.exceptions.ExistsByFullNameException;
+import com.xbrain.projetoxbrain.services.exceptions.ExistsByNameException;
 import com.xbrain.projetoxbrain.services.exceptions.OrderItemNotFoundException;
 import com.xbrain.projetoxbrain.services.exceptions.OrderNotFoundException;
 import com.xbrain.projetoxbrain.services.exceptions.ProductNotFoundException;
-import com.xbrain.projetoxbrain.services.exceptions.VendorNotFoundException;
+import com.xbrain.projetoxbrain.services.exceptions.SellerNotFoundException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +37,9 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
-    @ExceptionHandler(VendorNotFoundException.class)
-    public ResponseEntity<StandardError> sellerResourceNotFound(VendorNotFoundException e, HttpServletRequest request){
-        String error = "Vendor not found";
+    @ExceptionHandler(SellerNotFoundException.class)
+    public ResponseEntity<StandardError> sellerResourceNotFound(SellerNotFoundException e, HttpServletRequest request){
+        String error = "Seller not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
@@ -46,6 +49,30 @@ public class ResourceExceptionHandler {
     public ResponseEntity<StandardError> orderItemResourceNotFound(OrderItemNotFoundException e, HttpServletRequest request){
         String error = "Order item not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ExistsByFullNameException.class)
+    public ResponseEntity<StandardError> existsByFullNameException(ExistsByFullNameException e, HttpServletRequest request){
+        String error = "Already exists";
+        HttpStatus status = HttpStatus.CONFLICT;
+        StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ExistsByCpfException.class)
+    public ResponseEntity<StandardError> existsByCpfException(ExistsByCpfException e, HttpServletRequest request){
+        String error = "Already exists";
+        HttpStatus status = HttpStatus.CONFLICT;
+        StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ExistsByNameException.class)
+    public ResponseEntity<StandardError> existsByNameException(ExistsByNameException e, HttpServletRequest request){
+        String error = "Already exists";
+        HttpStatus status = HttpStatus.CONFLICT;
         StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
