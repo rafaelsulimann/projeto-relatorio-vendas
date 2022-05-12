@@ -1,25 +1,26 @@
 package com.xbrain.projetoxbrain.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class OrderItemDto implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    @NotBlank
+    @NotNull
     private Long productCode;
 
-    @NotBlank
+    @NotNull
     @Min(1)
-    private Integer quantity;
+    private BigInteger quantity = new BigInteger("0");
 
     public OrderItemDto(){
     }
 
-    public OrderItemDto(Long productCode, Integer quantity) {
+    public OrderItemDto(Long productCode, BigInteger quantity) {
         this.productCode = productCode;
         this.quantity = quantity;
     }
@@ -32,11 +33,11 @@ public class OrderItemDto implements Serializable{
         this.productCode = productCode;
     }
 
-    public Integer getQuantity() {
+    public BigInteger getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(BigInteger quantity) {
         this.quantity = quantity;
     }    
     

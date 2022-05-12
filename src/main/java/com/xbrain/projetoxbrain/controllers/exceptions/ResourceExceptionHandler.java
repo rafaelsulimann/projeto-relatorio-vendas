@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import com.xbrain.projetoxbrain.services.exceptions.ExistsByCpfException;
 import com.xbrain.projetoxbrain.services.exceptions.ExistsByFullNameException;
 import com.xbrain.projetoxbrain.services.exceptions.ExistsByNameException;
+import com.xbrain.projetoxbrain.services.exceptions.ExistsPaymentByOrder;
 import com.xbrain.projetoxbrain.services.exceptions.OrderItemNotFoundException;
 import com.xbrain.projetoxbrain.services.exceptions.OrderNotFoundException;
+import com.xbrain.projetoxbrain.services.exceptions.PaymentNotEnoughMoneyException;
+import com.xbrain.projetoxbrain.services.exceptions.PaymentNotFoundException;
 import com.xbrain.projetoxbrain.services.exceptions.ProductNotFoundException;
 import com.xbrain.projetoxbrain.services.exceptions.SellerNotFoundException;
 
@@ -23,7 +26,7 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(OrderNotFoundException.class)
     public ResponseEntity<StandardError> orderResourceNotFound(OrderNotFoundException e, HttpServletRequest request){
-        String error = "Order not found";
+        String error = "Not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
@@ -31,7 +34,7 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<StandardError> productResourceNotFound(ProductNotFoundException e, HttpServletRequest request){
-        String error = "Product not found";
+        String error = "Not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
@@ -39,7 +42,7 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(SellerNotFoundException.class)
     public ResponseEntity<StandardError> sellerResourceNotFound(SellerNotFoundException e, HttpServletRequest request){
-        String error = "Seller not found";
+        String error = "Not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
@@ -47,7 +50,15 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(OrderItemNotFoundException.class)
     public ResponseEntity<StandardError> orderItemResourceNotFound(OrderItemNotFoundException e, HttpServletRequest request){
-        String error = "Order item not found";
+        String error = "Not found";
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(PaymentNotFoundException.class)
+    public ResponseEntity<StandardError> paymentNotFoundException(PaymentNotFoundException e, HttpServletRequest request){
+        String error = "Not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
@@ -72,6 +83,22 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(ExistsByNameException.class)
     public ResponseEntity<StandardError> existsByNameException(ExistsByNameException e, HttpServletRequest request){
         String error = "Already exists";
+        HttpStatus status = HttpStatus.CONFLICT;
+        StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ExistsPaymentByOrder.class)
+    public ResponseEntity<StandardError> existsPaymentByOrder(ExistsByNameException e, HttpServletRequest request){
+        String error = "Already exists";
+        HttpStatus status = HttpStatus.CONFLICT;
+        StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(PaymentNotEnoughMoneyException.class)
+    public ResponseEntity<StandardError> notEnoughMoneyException(PaymentNotEnoughMoneyException e, HttpServletRequest request){
+        String error = "Payment invalid";
         HttpStatus status = HttpStatus.CONFLICT;
         StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);

@@ -1,5 +1,6 @@
 package com.xbrain.projetoxbrain.services.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,26 +51,27 @@ public class OrderItemServiceImpl implements OrderItemService{
         orderItemModel.setProductPrice(productModel.getPrice());
         orderItemModel.setOrder(orderModel);
         orderItemModel.setProduct(productModel);
-        orderModel.setTotal((orderModel.getTotal() + orderItemModel.getSubTotal()));
+        orderItemModel.setSubTotal(BigDecimal.valueOf(orderItemModel.getQuantity().intValue()).multiply(orderItemModel.getProductPrice()));
+        orderModel.setTotal((orderModel.getTotal().add(orderItemModel.getSubTotal())));
         return orderItemModel;
     }
 
     @Override
     public void delete(OrderItemModel orderItemModel, OrderModel orderModel) {
-        orderModel.setTotal((orderModel.getTotal() - orderItemModel.getSubTotal()));
+        orderModel.setTotal((orderModel.getTotal().subtract(orderItemModel.getSubTotal())));
         orderItemRepository.delete(orderItemModel);
     }
 
     @Override
     public OrderItemModel updateOrderItem(Long orderItemId, OrderItemModel orderItemModel, ProductModel productModel, OrderModel orderModel){
         OrderItemModel entity = findById(orderItemId);
-        orderModel.setTotal((orderModel.getTotal() - entity.getSubTotal()));
+        orderModel.setTotal((orderModel.getTotal().subtract(entity.getSubTotal())));
         entity.setProductCode(productModel.getProductId());
         entity.setProductName(productModel.getName());
         entity.setProductPrice(productModel.getPrice());
         entity.setProduct(productModel);
         entity.setQuantity(orderItemModel.getQuantity());
-        orderModel.setTotal((orderModel.getTotal() + entity.getSubTotal()));
+        orderModel.setTotal((orderModel.getTotal().add(entity.getSubTotal())));
         return entity;
     }
 

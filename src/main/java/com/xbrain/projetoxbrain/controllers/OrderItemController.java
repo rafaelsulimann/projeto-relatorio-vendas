@@ -9,9 +9,11 @@ import com.xbrain.projetoxbrain.dto.OrderItemDto;
 import com.xbrain.projetoxbrain.models.OrderItemModel;
 import com.xbrain.projetoxbrain.models.OrderModel;
 import com.xbrain.projetoxbrain.models.ProductModel;
+import com.xbrain.projetoxbrain.models.enums.OrderStatus;
 import com.xbrain.projetoxbrain.services.OrderItemService;
 import com.xbrain.projetoxbrain.services.OrderService;
 import com.xbrain.projetoxbrain.services.ProductService;
+import com.xbrain.projetoxbrain.services.exceptions.ExistsPaymentByOrder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +63,9 @@ public class OrderItemController {
     public ResponseEntity<OrderItemModel> saveOrderItemIntoOrder(@PathVariable Long orderId, @RequestBody @Valid OrderItemDto orderItemDto){
         ProductModel product = productService.findById(orderItemDto.getProductCode());
         OrderModel order = orderService.findById(orderId);
+        if(!order.getOrderStatus().equals(OrderStatus.WAITING_PAYMENT)){
+            throw new ExistsPaymentByOrder(orderId);
+        }
         OrderItemModel obj = orderItemService.fromDto(orderItemDto);
         obj = orderItemService.insert(obj, product, order);
         obj = orderItemService.save(obj);

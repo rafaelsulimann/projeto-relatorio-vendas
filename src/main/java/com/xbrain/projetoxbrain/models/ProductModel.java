@@ -1,6 +1,7 @@
 package com.xbrain.projetoxbrain.models;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -37,7 +38,7 @@ public class ProductModel implements Serializable {
     private String name;
 
     @Column(nullable = false)
-    private Double price;
+    private BigDecimal price = new BigDecimal("0.0").setScale(2);
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -55,7 +56,7 @@ public class ProductModel implements Serializable {
     public ProductModel() {
     }
 
-    public ProductModel(Long productId, String name, Double price, CategoryType categoryType, LocalDateTime creationDate) {
+    public ProductModel(Long productId, String name, BigDecimal price, CategoryType categoryType, LocalDateTime creationDate) {
         this.productId = productId;
         this.name = name;
         this.price = price;
@@ -79,11 +80,11 @@ public class ProductModel implements Serializable {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

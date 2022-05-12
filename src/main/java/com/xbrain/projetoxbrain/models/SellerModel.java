@@ -1,6 +1,7 @@
 package com.xbrain.projetoxbrain.models;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -164,10 +165,10 @@ public class SellerModel implements Serializable{
         this.orders = orders;
     }
 
-    public Double totalSalesValor(){
-        double sum = 0.0;
+    public BigDecimal totalSalesValor(){
+        BigDecimal sum = new BigDecimal("0.0").setScale(2);
         for(OrderModel order : orders){
-            sum += order.getTotal();
+            sum.add(sum.add(order.getTotal()));
         }
         return sum;
     }

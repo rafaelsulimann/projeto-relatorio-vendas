@@ -1,6 +1,8 @@
 package com.xbrain.projetoxbrain.models;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,10 +33,13 @@ public class OrderItemModel implements Serializable {
     private String productName;
 
     @Column(nullable = false)
-    private Double productPrice;
+    private BigDecimal productPrice = new BigDecimal("0.0").setScale(2);
 
     @Column(nullable = false)
-    private Integer quantity;
+    private BigInteger quantity = new BigInteger("0");
+
+    @Column(nullable = false)
+    private BigDecimal subTotal = new BigDecimal("0.0").setScale(2);
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -50,12 +55,13 @@ public class OrderItemModel implements Serializable {
     }       
 
     public OrderItemModel(Long orderItemId, Long productCode, String productName,
-            Double productPrice, Integer quantity, ProductModel product, OrderModel order) {
+            BigDecimal productPrice, BigInteger quantity, BigDecimal subTotal, ProductModel product, OrderModel order) {
         this.orderItemId = orderItemId;
         this.productCode = productCode;
         this.productName = productName;
         this.productPrice = productPrice;
         this.quantity = quantity;
+        this.subTotal = subTotal;
         this.product = product;
         this.order = order;
     }
@@ -84,20 +90,28 @@ public class OrderItemModel implements Serializable {
         this.productName = productName;
     }
 
-    public Double getProductPrice() {
+    public BigDecimal getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(Double productPrice) {
+    public void setProductPrice(BigDecimal productPrice) {
         this.productPrice = productPrice;
     }
 
-    public Integer getQuantity() {
+    public BigInteger getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(BigInteger quantity) {
         this.quantity = quantity;
+    }
+
+    public BigDecimal getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(BigDecimal subTotal) {
+        this.subTotal = subTotal;
     }
 
     public ProductModel getProduct() {
@@ -114,10 +128,6 @@ public class OrderItemModel implements Serializable {
 
     public void setOrder(OrderModel order) {
         this.order = order;
-    }
-
-    public double getSubTotal(){
-        return quantity * this.getProduct().getPrice();
     }
 
     @Override

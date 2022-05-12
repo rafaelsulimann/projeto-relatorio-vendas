@@ -1,6 +1,7 @@
 package com.xbrain.projetoxbrain.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import com.xbrain.projetoxbrain.models.SellerModel;
 
@@ -11,13 +12,13 @@ public class SellerSalesDto implements Serializable{
     private Long sellerId;
     private String fullName;
     private Integer totalSales;
-    private Double totalSalesValor;
-    private Double salesPerDay;
+    private BigDecimal totalSalesValor = new BigDecimal("0.0").setScale(2);
+    private BigDecimal salesPerDay = new BigDecimal("0");
 
     public SellerSalesDto() {
     }
 
-    public SellerSalesDto(SellerModel sellerModel, Double salesPerDay){
+    public SellerSalesDto(SellerModel sellerModel, BigDecimal salesPerDay){
         sellerId = sellerModel.getSellerId();
         fullName = sellerModel.getFullName();
         totalSales = sellerModel.totalSales();
@@ -49,19 +50,19 @@ public class SellerSalesDto implements Serializable{
         this.totalSales = totalSales;
     }
 
-    public Double getTotalSalesValor() {
+    public BigDecimal getTotalSalesValor() {
         return totalSalesValor;
     }
 
-    public void setTotalSalesValor(Double totalSalesValor) {
+    public void setTotalSalesValor(BigDecimal totalSalesValor) {
         this.totalSalesValor = totalSalesValor;
     }
 
-    public Double getSalesPerDay() {
+    public BigDecimal getSalesPerDay() {
         return salesPerDay;
     }
 
-    public void setSalesPerDay(Double salesPerDay) {
+    public void setSalesPerDay(BigDecimal salesPerDay) {
         this.salesPerDay = salesPerDay;
     }
 

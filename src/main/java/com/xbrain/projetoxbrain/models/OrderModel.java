@@ -1,10 +1,12 @@
 package com.xbrain.projetoxbrain.models;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -50,7 +53,7 @@ public class OrderModel implements Serializable {
     private LocalDateTime creationDate;
 
     @Column(nullable = false)
-    private Double total = 0.0;
+    private BigDecimal total = new BigDecimal("0.0").setScale(2);
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
@@ -62,11 +65,15 @@ public class OrderModel implements Serializable {
     @JoinColumn(name = "seller_id")
     private SellerModel seller;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private PaymentModel payment;
+
     public OrderModel (){
     }      
 
     public OrderModel(Long orderId, OrderStatus orderStatus, Long orderSellerId, String sellerFullName,
-            LocalDateTime creationDate, SellerModel seller, Double total) {
+            LocalDateTime creationDate, SellerModel seller, BigDecimal total) {
         this.orderId = orderId;
         this.orderStatus = orderStatus;
         this.orderSellerId = orderSellerId;
@@ -132,11 +139,11 @@ public class OrderModel implements Serializable {
         this.seller = seller;
     }    
 
-    public Double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(Double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 

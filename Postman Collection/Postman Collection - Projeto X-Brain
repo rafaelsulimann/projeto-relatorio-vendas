@@ -275,14 +275,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/orders/2/orderitems",
+							"raw": "localhost:8080/orders/1/orderitems",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"orders",
-								"2",
+								"1",
 								"orderitems"
 							]
 						}
@@ -325,14 +325,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/orders/2/orderitems",
+							"raw": "localhost:8080/orders/1/orderitems",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"orders",
-								"2",
+								"1",
 								"orderitems"
 							]
 						}
@@ -500,6 +500,102 @@
 							"port": "8080",
 							"path": [
 								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PAYMENT",
+			"item": [
+				{
+					"name": "PAYMENT - GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/orders/1/payment",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"1",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PAYMENT - GET BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/orders/1/payment/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"1",
+								"payment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PAYMENT - CREATE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"paymentType\": \"DEBIT\",\r\n    \"valor\": \"199.60\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/orders/1/payment",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"1",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PAYMENT - DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/orders/1/payment/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"1",
+								"payment",
 								"1"
 							]
 						}
