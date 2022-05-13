@@ -14,11 +14,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/sellers",
+							"raw": "https://projeto-xbrain.herokuapp.com/sellers",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"sellers"
 							],
@@ -84,11 +86,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/sellers/3",
+							"raw": "https://projeto-xbrain.herokuapp.com/sellers/3",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"sellers",
 								"3"
@@ -103,11 +107,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/sellers/sales",
+							"raw": "https://projeto-xbrain.herokuapp.com/sellers/sales",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"sellers",
 								"sales"
@@ -143,11 +149,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/sellers",
+							"raw": "https://projeto-xbrain.herokuapp.com/sellers",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"sellers"
 							]
@@ -170,11 +178,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/sellers/1",
+							"raw": "https://projeto-xbrain.herokuapp.com/sellers/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"sellers",
 								"1"
@@ -198,11 +208,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/sellers/1/image",
+							"raw": "https://projeto-xbrain.herokuapp.com/sellers/1/image",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"sellers",
 								"1",
@@ -218,11 +230,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/sellers/2",
+							"raw": "https://projeto-xbrain.herokuapp.com/sellers/2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"sellers",
 								"2"
@@ -242,11 +256,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/orders",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders"
 							]
@@ -260,11 +276,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/orders/1",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders",
 								"1"
@@ -288,11 +306,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/orders",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders"
 							]
@@ -315,11 +335,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/orders/2",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders/2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders",
 								"2"
@@ -334,11 +356,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/orders/1",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders",
 								"1"
@@ -358,11 +382,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/orders/1/orderitems",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders/1/orderitems",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders",
 								"1",
@@ -378,11 +404,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/orders/1/orderitems/1",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders/1/orderitems/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders",
 								"1",
@@ -408,11 +436,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/orders/2/orderitems",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders/2/orderitems",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders",
 								"2",
@@ -437,11 +467,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/orders/2/orderitems/3",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders/2/orderitems/3",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders",
 								"2",
@@ -458,11 +490,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/orders/2/orderitems/3",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders/2/orderitems/3",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders",
 								"2",
@@ -484,11 +518,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/products",
+							"raw": "https://projeto-xbrain.herokuapp.com/products",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"products"
 							]
@@ -502,11 +538,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/products/1",
+							"raw": "https://projeto-xbrain.herokuapp.com/products/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"products",
 								"1"
@@ -522,7 +560,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Camisa básica Polo Royal - preta\",\r\n    \"price\": \"49.90\",\r\n    \"categoryType\": \"SHIRT\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Camisa básica Polo Royal - branca\",\r\n    \"price\": \"49.90\",\r\n    \"categoryType\": \"SHIRT\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -530,11 +568,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/products",
+							"raw": "https://projeto-xbrain.herokuapp.com/products",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"products"
 							]
@@ -557,11 +597,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/products/1",
+							"raw": "https://projeto-xbrain.herokuapp.com/products/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"products",
 								"1"
@@ -576,11 +618,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/products/1",
+							"raw": "https://projeto-xbrain.herokuapp.com/products/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"products",
 								"1"
@@ -600,11 +644,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/orders/1/payment",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders/1/payment",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders",
 								"1",
@@ -620,11 +666,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/orders/1/payment/1",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders/1/payment/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders",
 								"1",
@@ -650,11 +698,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/orders/2/payment",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders/2/payment",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders",
 								"2",
@@ -670,11 +720,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/orders/1/payment/1",
+							"raw": "https://projeto-xbrain.herokuapp.com/orders/1/payment/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"projeto-xbrain",
+								"herokuapp",
+								"com"
 							],
-							"port": "8080",
 							"path": [
 								"orders",
 								"1",
