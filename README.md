@@ -34,11 +34,11 @@ Porém só será possível acessar a API através dos ENDPOINTS, e para isso ser
 
 - Para facilitar, na **PASTA “POSTMAN COLLECTION”** do projeto contém uma **COLEÇÃO COMPLETA** dos **ENDPOINTS** disponíveis, e vem até com o **FILTRO** da data para filtras as vendas do usuário. Lembrando que os **FILTROS** podem ser **CONFIGURADOS** pelo **PROPRIO USUÁRIO** de acordo com o que ele deseja filtrar.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/30817700-d665-42b3-9fcd-b80e0b19ad4c/Untitled.png)
+![1](https://user-images.githubusercontent.com/97992737/168383674-265179d6-9703-4122-9b1e-2a6f9925f70f.jpg)
 
 - Agora vamos entrar no **POSTMAN** e **IMPORTAR** esta **COLEÇÃO**.
 
-![foto2.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a1af2dc5-57d0-46e1-b0f7-28a2c95ae5de/foto2.png)
+![2](https://user-images.githubusercontent.com/97992737/168383784-20ae3e56-e295-4866-ada3-b508b7e0b49e.jpg)
 
 - E depois selecionar a **COLEÇÃO** do projeto e então você já terá **ACESSO** a todos os **ENDPOINTS** disponíveis deste projeto.
 
@@ -53,18 +53,18 @@ Porém só será possível acessar a API através dos ENDPOINTS, e para isso ser
 
 - Para fazer isso, basta abrir a **PASTA** da **COLEÇÃO** do **POSTMAN** chamada **“SELLER”**, e dentro dele terá uma **REQUISIÇÃO** do tipo **POST**.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bbd4b670-9fb1-4e67-af08-5e47d25497b7/Untitled.png)
+![3](https://user-images.githubusercontent.com/97992737/168383844-828e7e00-5073-4c48-871f-b71adc736f14.jpg)
 
 - Clicando nela, **AUTOMATICAMENTE** o **POSTMAN** irá nos **REDIRECIONAR** para o **ENDPOINT** específico para **CRIAR VENDEDORES**.
 - Após isto, precisamos ir em **BODY → RAW,** e aqui já terá um **MOLDE** pronto para você **ADICIONAR** um **VENDEDOR**, podendo apenas alterar as **INFORMAÇÕES** dos **ATRIBUTOS** que estiverem aparecendo na tela do **RAW**.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b9c2e690-01eb-4329-a7a6-792c12160fbf/Untitled.png)
+![4](https://user-images.githubusercontent.com/97992737/168383886-a05ce00f-b774-4660-8286-990ca39253d6.jpg)
 
 ## 1.2) CRIAR PRODUTO
 
 - Para criar um **PRODUTO** vamos fazer da mesma forma que fizemos com o **VENDEDOR**, porém agora na pasta de **“PRODUCT”**. Nesta pasta temos também uma **REQUISIÇÃO** do tipo **POST** já com um **MOLDE** para a criação de um produto.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f294fa64-8706-4f85-a3aa-4679544e0b05/Untitled.png)
+![5](https://user-images.githubusercontent.com/97992737/168383920-a5fcd809-e33b-445f-bb2b-1ec3dde474a4.jpg)
 
 - Porém, no cadastro de **PRODUTO**, precisaremos inserir o **TIPO** da **CATEGORIA** deste produto, e precisa se **ESCRITO** exatamente igual às **CATEGORIAS** cadastradas (até com as letras **MAIÚSCULAS**). Abaixo segue as **CATEGORIAS CADASTRADAS**:
     - SHIRT
@@ -74,28 +74,28 @@ Porém só será possível acessar a API através dos ENDPOINTS, e para isso ser
     - GLASSES
 - Ficará assim:
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/edf5763e-d8e0-4edf-88f5-bb3984d371f1/Untitled.png)
+![6](https://user-images.githubusercontent.com/97992737/168383955-68c64a83-e87b-49be-91c3-d584c9afd8f3.jpg)
 
 # 2) REALIZAR UMA VENDA
 
 - Para a realização de uma venda, precisaremos **PRIMEIRAMENTE** iniciar a venda informando qual será o **VENDEDOR RESPONSÁVEL** por aquela **VENDA**.
 - Então para isso, vamos primeiro na **COLEÇÃO** chamada **“ORDER”** e acessar a **REQUISIÇÃO** do tipo **POST**, que também já terá um **MOLDE** para a criação.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1a223015-a117-49f8-a611-3999a9eabd8d/Untitled.png)
+![7](https://user-images.githubusercontent.com/97992737/168383994-97bc7001-8fae-41f3-b869-4d1c33f80c74.jpg)
 
 - Aqui precisaremos inserir um **ID** de algum **VENDEDOR** existente, pois caso o mesmo não esteja cadastrado previamente, não será possível a realização da venda.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2ce45a39-40c8-4066-ad09-da7ac2c929f5/Untitled.png)
+![8](https://user-images.githubusercontent.com/97992737/168384023-5f15adf1-8b3f-4618-a8d8-a365725a66bc.jpg)
 
 ## 2.1) ADICIONAR ITENS À VENDA
 
 - Perceba que quando iniciamos a **VENDA** informando o **VENDEDOR**, ela iniciou com o valor **ZERO**, agora precisaremos **INSERIR** os **PRODUTOS** nesta venda, para isso vamos **UTILIZAR** a pasta chamada **“ORDER ITEM”**, onde informaremos o **ID** do **PRODUTO** e a **QUANTIDADE** a ser adicionada deste mesmo produto.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/624016f2-0e9c-4069-8961-19ad81ffd844/Untitled.png)
+![9](https://user-images.githubusercontent.com/97992737/168384049-d1301cfd-dea2-46aa-ab90-2c1110ff15f5.jpg)
 
 - Porém perceba que agora na **URL** da **REQUISIÇÃO**, precisaremos informar qual é o **ID** do **“ORDER”** que queremos **ADICIONAR** o determinado **PRODUTO**, e também inserir **“orderitems”** no final.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fb587892-d193-434f-baf1-7d982b02c5bf/Untitled.png)
+![10](https://user-images.githubusercontent.com/97992737/168384090-b404a0e5-d057-40dd-8eb1-ce6e3a4dd893.jpg)
 
 - O sistema irá verificar o **PREÇO** que foi **CADASTRADO** para o **PRODUTO** informado, e irá realizar o **CÁLCULO** do **SUBTOTAL** de cada **PRODUTO**, e depois irá **ADICIONAR** para o valor **TOTAL** da **VENDA**.
 
@@ -104,7 +104,7 @@ Porém só será possível acessar a API através dos ENDPOINTS, e para isso ser
 - Após adicionado todos os **PRODUTOS** desejados com suas devidas **QUANTIDADES** na **VENDA**, vamos agora realizar o **PAGAMENTO** desta venda.
 - Para isso, devemos ir na pasta chamada **“PAYMENT”** e acessar a **REQUISIÇÃO** do tipo **POST**.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9403b3d0-d3a3-4e19-aac9-f82cf8e36958/Untitled.png)
+![11](https://user-images.githubusercontent.com/97992737/168384122-aeb82972-8ce0-40cf-a669-88a3a0dce1d3.jpg)
 
 - Aqui novamente precisaremos inserir o **ID** do **“ORDER”** específica na **URL** da **REQUISIÇÃO**, e também inserir a palavra **“payment”** no final, para que o sistema saiba qual é a **VENDA** que deseja realizar o **PAGAMENTO**.
 - Após isto, já tem um **MOLDE** pronto para a criação de um **PAGAMENTO**, porém perceba que precisaremos informar o **TIPO** de **PAGAMENTO**, e da mesma forma que a **CATEGORIA** do **PRODUTO**, precisaremos também inserir **EXATAMENTE IGUAL** ao que está cadastrado. Segue abaixo os tipos:
@@ -113,7 +113,7 @@ Porém só será possível acessar a API através dos ENDPOINTS, e para isso ser
     - MONEY
 - Depois disso, precisaremos também informar o **VALOR** que está sendo **PAGO**, lembrando que este valor **NÃO PODE** ser **MENOR** que o valor **TOTAL** da venda, se não irá dar erro de pagamento, e caso seja um valor **MAIOR**, será informado no **ATRIBUTO** chamado **“moneyChange”** o valor a ser retornado de **TROCO**.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1ef2b268-7813-40d7-b12b-0b6f7caad600/Untitled.png)
+![12](https://user-images.githubusercontent.com/97992737/168384141-134b86f3-f062-43d4-af2b-615a0dac01d4.jpg)
 
 - Após ser realizar o **PAGAMENTO**, o **STATUS** da **VENDA** será alterada de **“WAITING_PAYMENT”** para **“PAID”**.
 
@@ -122,7 +122,7 @@ Porém só será possível acessar a API através dos ENDPOINTS, e para isso ser
 - Após realizado todo o **PROCESSO** de uma **VENDA**, podemos também retirar um **RELATÓRIO DE VENDAS** de **TODOS OS VENDEDORES**, porém será considerado apenas as **VENDAS** com o **STATUS** de **“PAID”**.
 - Para isso, vamos ir na pasta **“SELLER”** e acessar a **REQUISIÇÃO** chamado **“GET SALES”**.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7cbe6cd8-e51d-4de3-a029-104ad5d7a910/Untitled.png)
+![13](https://user-images.githubusercontent.com/97992737/168384181-9004fcd9-a783-4e8d-8d25-8c86a79b1c93.jpg)
 
 - Após isto, temos **2 FORMATOS** para a **CONSULTA**:
 
@@ -130,7 +130,7 @@ Porém só será possível acessar a API através dos ENDPOINTS, e para isso ser
 
 - Caso não seja informado nenhum **PERÍODO**, será **RETORNADO** o **TOTAL** de **VENDAS** dos **VENDEDORES**, porém sem o **CÁLCULO** de **MÉDIA** de **VENDAS** por **DIA**.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8fd5c809-8c65-4a35-81db-86ac99abc59d/Untitled.png)
+![14](https://user-images.githubusercontent.com/97992737/168384265-48df034a-7fde-4212-8830-410e8ea31071.jpg)
 
 ## 4.2) COM PARÂMETRO
 
@@ -138,7 +138,7 @@ Porém só será possível acessar a API através dos ENDPOINTS, e para isso ser
 - Caso o **VENDEDOR** não possua **NENHUMA VENDA** neste período, ele não irá **CONSTAR** no **RELATÓRIO**.
 - Perceba que ja deixei pronto os **PARÂMETROS** das **DATAS** para serem utilizadas, para não precisar escrever **MANUALMENTE** a **CONSULTA**, então basta clicar no **CHECK-BOX** do atributo e no **“VALUE”** inserir a **DATA** desejada, com o formato “aaaa-mm-dd”.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d8a12053-2a01-46e7-8783-41b6700e6466/Untitled.png)
+![15](https://user-images.githubusercontent.com/97992737/168384290-f94322fe-86e6-4db1-bb68-1b28f041dbaf.jpg)
 
 # CONCLUSÃO
 
