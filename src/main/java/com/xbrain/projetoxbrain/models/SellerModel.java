@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.xbrain.projetoxbrain.models.enums.OrderStatus;
 import com.xbrain.projetoxbrain.models.enums.SellerStatus;
 
 import org.hibernate.annotations.Fetch;
@@ -166,15 +167,21 @@ public class SellerModel implements Serializable{
     }
 
     public BigDecimal totalSalesValor(){
-        BigDecimal sum = new BigDecimal("0.0").setScale(2);
+        double sum = 0.0;
         for(OrderModel order : orders){
-            sum.add(sum.add(order.getTotal()));
+            sum += order.getTotal().doubleValue();
         }
-        return sum;
+        return BigDecimal.valueOf(sum).setScale(2);
     }
 
-    public Integer totalSales(){
-        return orders.size();
+    public BigDecimal totalSales(){
+        int sum = 0;
+        for(OrderModel order : orders){
+            if(order.getOrderStatus().equals(OrderStatus.PAID)){
+                sum += 1;
+            }
+        }
+        return BigDecimal.valueOf(sum);
     }
 
     @Override

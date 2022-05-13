@@ -11,19 +11,18 @@ public class SellerSalesDto implements Serializable{
 
     private Long sellerId;
     private String fullName;
-    private Integer totalSales;
+    private BigDecimal totalSales = new BigDecimal("0.0").setScale(2);
     private BigDecimal totalSalesValor = new BigDecimal("0.0").setScale(2);
     private BigDecimal salesPerDay = new BigDecimal("0");
 
     public SellerSalesDto() {
     }
 
-    public SellerSalesDto(SellerModel sellerModel, BigDecimal salesPerDay){
+    public SellerSalesDto(SellerModel sellerModel){
         sellerId = sellerModel.getSellerId();
         fullName = sellerModel.getFullName();
         totalSales = sellerModel.totalSales();
         totalSalesValor = sellerModel.totalSalesValor();
-        this.salesPerDay = salesPerDay;
     }
 
     public Long getSellerId() {
@@ -42,11 +41,11 @@ public class SellerSalesDto implements Serializable{
         this.fullName = fullName;
     }
 
-    public Integer getTotalSales() {
+    public BigDecimal getTotalSales() {
         return totalSales;
     }
 
-    public void setTotalSales(Integer totalSales) {
+    public void setTotalSales(BigDecimal totalSales) {
         this.totalSales = totalSales;
     }
 

@@ -1,11 +1,17 @@
 package com.xbrain.projetoxbrain.services.impl;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import com.xbrain.projetoxbrain.dto.SellerDto;
+import com.xbrain.projetoxbrain.dto.SellerSalesDto;
 import com.xbrain.projetoxbrain.models.SellerModel;
 import com.xbrain.projetoxbrain.models.enums.SellerStatus;
 import com.xbrain.projetoxbrain.repositories.SellerRepository;
@@ -84,6 +90,37 @@ public class SellerServiceImpl implements SellerService{
     @Override
     public boolean existsByCpf(String cpf){
         return sellerRepository.existsByCpf(cpf);
+    }
+
+    @Override
+    public Set<SellerSalesDto> sellerSales(){
+        List<SellerModel> sellerList = findAll();
+        Set<SellerSalesDto> sellerSalesList = new HashSet<>();
+        for(SellerModel seller : sellerList){
+            SellerSalesDto obj = new SellerSalesDto(seller);
+            sellerSalesList.add(obj);
+        }
+        return sellerSalesList;
+    }
+
+    @Override
+    public Set<SellerSalesDto> sellerSalesWithDate(LocalDateTime minDate, LocalDateTime maxDate){
+        List<SellerModel> sellerList = sellerRepository.findByOrdersCreationDateBetween(minDate, maxDate);
+        long diff = minDate.until(maxDate, ChronoUnit.DAYS);        
+        Set<SellerSalesDto> sellerSalesList = new HashSet<>();
+        for(SellerModel seller : sellerList){
+            SellerSalesDto obj = new SellerSalesDto(seller);
+            BigDecimal salesPerDay = new BigDecimal("0.0").setScale(2);
+            salesPerDay = obj.getTotalSales().divide(BigDecimal.valueOf(diff), 2, RoundingMode.UP);
+            obj.setSalesPerDay(salesPerDay);            
+            sellerSalesList.add(obj);
+        }
+        return sellerSalesList;
+    }
+
+    @Override
+    public List<SellerModel> findByOrdersCreationDateBetween(LocalDateTime minDate, LocalDateTime maxDate){
+        return sellerRepository.findByOrdersCreationDateBetween(minDate, maxDate);
     }
     
 }

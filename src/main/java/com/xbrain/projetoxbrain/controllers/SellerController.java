@@ -1,10 +1,16 @@
 package com.xbrain.projetoxbrain.controllers;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.xbrain.projetoxbrain.controllers.util.URL;
 import com.xbrain.projetoxbrain.dto.SellerDto;
+import com.xbrain.projetoxbrain.dto.SellerSalesDto;
 import com.xbrain.projetoxbrain.models.SellerModel;
 import com.xbrain.projetoxbrain.services.SellerService;
 import com.xbrain.projetoxbrain.services.exceptions.ExistsByCpfException;
@@ -20,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -78,6 +85,14 @@ public class SellerController {
         obj = sellerService.updateImage(sellerId, obj);
         obj = sellerService.save(obj);
         return ResponseEntity.ok().body("Image updated sucefully");
+    }
+
+    @GetMapping(value = "/sales")
+    public ResponseEntity<Set<SellerSalesDto>> sellerSales(@RequestParam(value = "minDate", required = false) String minDate, @RequestParam(value = "maxDate", required = false) String maxDate){
+        LocalDateTime min = URL.converterDate(minDate, LocalDate.parse("2022-05-12").atTime(0, 0));
+        LocalDateTime max = URL.converterDate(maxDate, LocalDateTime.now(ZoneId.of("UTC")));
+        Set<SellerSalesDto> list = sellerService.sellerSalesWithDate(min, max);
+        return ResponseEntity.ok().body(list);
     }
     
 }
