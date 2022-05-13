@@ -3,8 +3,10 @@ package com.xbrain.projetoxbrain.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.xbrain.projetoxbrain.models.SellerModel;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SellerSalesDto implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -13,7 +15,7 @@ public class SellerSalesDto implements Serializable{
     private String fullName;
     private BigDecimal totalSales = new BigDecimal("0.0").setScale(2);
     private BigDecimal totalSalesValor = new BigDecimal("0.0").setScale(2);
-    private BigDecimal salesPerDay = new BigDecimal("0");
+    private BigDecimal salesPerDay;
 
     public SellerSalesDto() {
     }

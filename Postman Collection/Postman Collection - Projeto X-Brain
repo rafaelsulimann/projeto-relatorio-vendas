@@ -21,6 +21,58 @@
 							"port": "8080",
 							"path": [
 								"sellers"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "fullName",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "phoneNumber",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "cpf",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "sellerStatus",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "minDate",
+									"value": "2022-05-10",
+									"disabled": true
+								},
+								{
+									"key": "maxDate",
+									"value": "2022-05-11",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -40,6 +92,37 @@
 							"path": [
 								"sellers",
 								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SELLER - GET SALES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/sellers/sales",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sellers",
+								"sales"
+							],
+							"query": [
+								{
+									"key": "minDate",
+									"value": "2022-05-10",
+									"disabled": true
+								},
+								{
+									"key": "maxDate",
+									"value": "2022-05-19",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -325,14 +408,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/orders/1/orderitems",
+							"raw": "localhost:8080/orders/2/orderitems",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"orders",
-								"1",
+								"2",
 								"orderitems"
 							]
 						}
@@ -567,14 +650,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/orders/1/payment",
+							"raw": "localhost:8080/orders/2/payment",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"orders",
-								"1",
+								"2",
 								"payment"
 							]
 						}

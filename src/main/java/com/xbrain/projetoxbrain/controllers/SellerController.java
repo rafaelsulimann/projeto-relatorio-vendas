@@ -89,10 +89,16 @@ public class SellerController {
 
     @GetMapping(value = "/sales")
     public ResponseEntity<Set<SellerSalesDto>> sellerSales(@RequestParam(value = "minDate", required = false) String minDate, @RequestParam(value = "maxDate", required = false) String maxDate){
-        LocalDateTime min = URL.converterDate(minDate, LocalDate.parse("2022-05-12").atTime(0, 0));
-        LocalDateTime max = URL.converterDate(maxDate, LocalDateTime.now(ZoneId.of("UTC")));
-        Set<SellerSalesDto> list = sellerService.sellerSalesWithDate(min, max);
-        return ResponseEntity.ok().body(list);
+        Set<SellerSalesDto> sales = null;
+        if(minDate != null || maxDate != null){
+        LocalDateTime min = URL.converterMinDate(minDate, LocalDate.parse("2022-05-13").atTime(0, 0));
+        LocalDateTime max = URL.converterMaxDate(maxDate, LocalDateTime.now(ZoneId.of("UTC")));
+        sales = sellerService.sellerSalesWithDate(min, max);
+        }
+        else{
+            sales = sellerService.sellerSales();
+        }
+        return ResponseEntity.ok().body(sales);
     }
     
 }

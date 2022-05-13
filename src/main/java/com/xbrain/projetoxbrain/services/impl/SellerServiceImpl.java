@@ -2,6 +2,7 @@ package com.xbrain.projetoxbrain.services.impl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -105,14 +106,17 @@ public class SellerServiceImpl implements SellerService{
 
     @Override
     public Set<SellerSalesDto> sellerSalesWithDate(LocalDateTime minDate, LocalDateTime maxDate){
-        List<SellerModel> sellerList = sellerRepository.findByOrdersCreationDateBetween(minDate, maxDate);
-        long diff = minDate.until(maxDate, ChronoUnit.DAYS);        
+        List<SellerModel> sellerList = sellerRepository.findByOrdersCreationDateBetween(minDate, maxDate);       
         Set<SellerSalesDto> sellerSalesList = new HashSet<>();
         for(SellerModel seller : sellerList){
+            if(minDate == LocalDate.parse("2022-05-13").atTime(0, 0)){
+                minDate = seller.getCreationDate();
+            }
+            long diff = minDate.until(maxDate, ChronoUnit.DAYS); 
             SellerSalesDto obj = new SellerSalesDto(seller);
             BigDecimal salesPerDay = new BigDecimal("0.0").setScale(2);
             salesPerDay = obj.getTotalSales().divide(BigDecimal.valueOf(diff), 2, RoundingMode.UP);
-            obj.setSalesPerDay(salesPerDay);            
+            obj.setSalesPerDay(new BigDecimal(salesPerDay.toString()));            
             sellerSalesList.add(obj);
         }
         return sellerSalesList;
