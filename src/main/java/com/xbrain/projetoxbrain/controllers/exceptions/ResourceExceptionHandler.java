@@ -13,6 +13,7 @@ import com.xbrain.projetoxbrain.services.exceptions.OrderItemNotFoundException;
 import com.xbrain.projetoxbrain.services.exceptions.OrderNotFoundException;
 import com.xbrain.projetoxbrain.services.exceptions.PaymentNotEnoughMoneyException;
 import com.xbrain.projetoxbrain.services.exceptions.PaymentNotFoundException;
+import com.xbrain.projetoxbrain.services.exceptions.PaymentWithoutItems;
 import com.xbrain.projetoxbrain.services.exceptions.ProductNotFoundException;
 import com.xbrain.projetoxbrain.services.exceptions.SellerNotFoundException;
 
@@ -100,6 +101,14 @@ public class ResourceExceptionHandler {
     public ResponseEntity<StandardError> notEnoughMoneyException(PaymentNotEnoughMoneyException e, HttpServletRequest request){
         String error = "Payment invalid";
         HttpStatus status = HttpStatus.CONFLICT;
+        StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(PaymentWithoutItems.class)
+    public ResponseEntity<StandardError> PaymentWithoutItems(PaymentWithoutItems e, HttpServletRequest request){
+        String error = "Payment withou items";
+        HttpStatus status = HttpStatus.LENGTH_REQUIRED;
         StandardError err = new StandardError(LocalDateTime.now(ZoneId.of("UTC")), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }

@@ -13,6 +13,7 @@ import com.xbrain.projetoxbrain.services.OrderService;
 import com.xbrain.projetoxbrain.services.PaymentService;
 import com.xbrain.projetoxbrain.services.exceptions.ExistsPaymentByOrder;
 import com.xbrain.projetoxbrain.services.exceptions.PaymentNotEnoughMoneyException;
+import com.xbrain.projetoxbrain.services.exceptions.PaymentWithoutItems;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -61,9 +62,12 @@ public class PaymentController {
         if(!order.getOrderStatus().equals(OrderStatus.WAITING_PAYMENT)){
             throw new ExistsPaymentByOrder(orderId);
         }
+        if(order.getItems().size() == 0){
+            throw new PaymentWithoutItems(orderId);
+        }
         if(order.getTotal().compareTo(paymentDto.getValor()) > 0){
             throw new PaymentNotEnoughMoneyException((order.getTotal().subtract(paymentDto.getValor())));
-        }
+        }        
         PaymentModel obj = paymentService.fromDto(paymentDto);
         obj = paymentService.insert(obj, order);
         obj = paymentService.save(obj);
