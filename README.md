@@ -140,6 +140,27 @@ Porém só será possível acessar a API através dos ENDPOINTS, e para isso ser
 
 ![15](https://user-images.githubusercontent.com/97992737/168384290-f94322fe-86e6-4db1-bb68-1b28f041dbaf.jpg)
 
+# DOCKERFILE, DOCKER COMPOSE
+
+- Neste código também foi **IMPLEMENTADO** o **DOCKERFILE** e também o **DOCKER COMPOSE** como uma segunda opção para **TESTAR** a **API.**
+- Porém neste cenário, você precisará ter **INSTALADO** na sua máquina local, o **DOCKER**.
+- Caso seja este seu caso e você queira **TESTAR** através do **DOCKER**, você então pode seguir o passo-a-passo abaixo.
+
+## 1) BAIXANDO O CÓDIGO PARA MÁQUINA LOCAL
+
+- Primeira coisa que precisamos fazer é então **BAIXAR** o **CÓDIGO** para nossa máquina, podemos fazer isto através do **GIT HUB**, ou então dando um **PULL** para um **REPOSITÓRIO LOCAL** do **GIT.**
+
+## 2) SUBINDO OS CONTAINERS DA API + BANCO
+
+- Então agora para **STARTAR** a aplicação, devemos entrar no **DIRETÓRIO** onde se encontra o **ARQUIVO** chamado **DOCKER-COMPSE.YAML**, e digitar no **TERMINAL DE COMANDOS**, o seguinte comando:
+
+```java
+docker-compose up
+```
+
+- Fazendo isto ele irá **SUBIR** os **CONTAINERS** da **API** e também do **BANCO DE DADOS**, onde as duas imagens estão se **COMUNICANDO** através das **CONFIGURAÇÕES** feitas pelo **DOCKER-COMPOSE.YAML**.
+- Depois de **SUBIR OS CONTAINER**, podemos então **ACESSAR** os **MESMOS ENDPOINTS** que temos acesso pelo **HEROKU**, porém agora a **URL** não será mais a do **HEROKU** e sim **“localhost:8080”.**
+
 # CONCLUSÃO
 
 - Então como vimos, para a realização de uma **VENDA**, precisaremos previamente criar os **VENDEDORES** e os **PRODUTO**, depois precisaremos **INICIAR** uma **VENDA** informando o **VENDEDOR** responsável por aquela venda, após vamos então inserir os **PRODUTOS** com suas **QUANTIDADES** na **VENDA** específicada na **URL** da requisição, depois realizar então o **PAGAMENTO** da venda, para que então no final, possamos retirar o **RELATÓRIO** de vendas de algum vendedor.
