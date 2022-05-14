@@ -23,5 +23,5 @@ spring:
     ansi:
       enabled: always
 
-  profiles:
-    active: prod
+  #profiles:
+  #  active: prod
